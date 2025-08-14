@@ -9,13 +9,12 @@ build:
   number: 0
 
 requirements:
-  build:
-    # curl is needed only for downloading whl files in build.sh
-    - curl 8.14.1
   host:
     - python
     - pip
     - wheel
+    # curl is needed only for downloading whl files in build.sh
+    - curl
   run:
     - python
     - urllib3 >=2.0.6
