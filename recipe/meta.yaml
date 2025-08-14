@@ -1,0 +1,57 @@
+{% set name = "trust3-client" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    # curl is needed only for downloading whl files in build.sh
+    - curl 8.14.1
+  host:
+    - python
+    - pip
+    - wheel
+  run:
+    - python
+    - urllib3 >=2.0.6
+    - cryptography >=41.0.4
+    - posthog
+    - pyjwt >=2.10.1
+    - requests >=2.32.3
+
+test:
+  imports:
+    - trust3_client
+    - trust3_client.backend
+    - trust3_client.exception
+    - trust3_client.interceptor
+    - trust3_client.model
+  commands:
+    # pip check disabled because dist-meta needed cryptography==41.0.4, which is not available in main or snowflake channel.
+    # - pip check
+  requires:
+    - pip
+
+about:
+  home: https://trust3.ai
+  summary: Python benchmark suite
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  description: |
+    The trust3_client library allows you to seamlessly integrate Privacera AI Governance into your Langchain projects.
+    This README provides a step-by-step guide on how to set up and use the library.
+  doc_url: https://docs.trust3.ai
+
+extra:
+  recipe-maintainers:
+    - aosipov
+  skip-lints:
+    - invalid_url
+    - missing_dev_url
+
